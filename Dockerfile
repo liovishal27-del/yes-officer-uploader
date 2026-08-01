@@ -1,6 +1,6 @@
-FROM python:3.10-slim-buster
+FROM python:3.10-slim-bookworm
 
-# Install aria2c and system dependencies
+# Install aria2 and system dependencies
 RUN apt-get update && apt-get install -y aria2 ffmpeg && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
