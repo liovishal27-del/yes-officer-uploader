@@ -4,10 +4,13 @@ import logging
 from pyrogram import Client, filters, idle
 from pyrogram.types import Message
 
-# Logging enable kar diya taaki Railway logs me activity dikhe
-logging.basicConfig(level=logging.INFO)
+# Logging enable kar diya taaki Railway logs me clear status dikhe
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+)
 
-# Telegram Credentials
+# Telegram Credentials (Environment Variables se fetch honge)
 API_ID = int(os.environ.get("API_ID", 26754022))
 API_HASH = os.environ.get("API_HASH", "1a0b65e7a4d48e08687c732bdc0f2cc4")
 BOT_TOKEN = os.environ.get("BOT_TOKEN", "8747409837:AAG5m8BWGAEStaeJG9Ap2JCEQmXD56HSsVM")
@@ -133,13 +136,15 @@ async def handle_drm_command(client: Client, message: Message):
     await status_msg.edit_text("✅ **Sabhi files successfully upload ho gayi hain!**")
 
 
-async def main():
+async def start_services():
     await user_app.start()
     await bot.start()
-    print("--- LIO BANKERS BOT STARTED SUCCESSFULLY ---")
+    print("--------------------------------------------------")
+    print("🚀 LIO BANKERS BOT IS NOW ONLINE & READY TO USE!")
+    print("--------------------------------------------------")
     await idle()
-    await user_app.stop()
     await bot.stop()
+    await user_app.stop()
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    asyncio.run(start_services())
